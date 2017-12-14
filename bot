@@ -2,8 +2,7 @@
 #include "stdafx.h"
 //
 //
-unsigned char key = {4};
-key = "qqw";
+unsigned char key[4] = "qqw";
 //
 //
 struct gamma { unsigned char state[4]; };
