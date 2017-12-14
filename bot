@@ -1,0 +1,35 @@
+#include <iostream>
+#include "stdafx.h"
+//
+//
+unsigned char key = {4};
+key = "qqw";
+//
+//
+struct gamma { unsigned char state[4]; };
+//
+gamma g = new_gamma(key);
+//
+
+struct gamma { unsigned char state[4]; };
+gamma new_gamma(unsigned char key)
+{
+	gamma g;
+	srand(key);
+	g.state = rand();
+	return g;
+}
+unsigned char encryption(unsigned char str, gamma g)
+{
+	unsigned char cipher = { 4 };
+	cipher = str ^ *g.state;
+	cipher >> 1;
+	return cipher;
+}
+unsigned char decryption(unsigned char str, gamma g)
+{
+	unsigned char cipher = { 4 };
+	str << 1;
+	cipher = str ^ *g.state;
+	return cipher;
+}
