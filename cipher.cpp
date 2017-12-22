@@ -1,47 +1,47 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include "stdafx.h"
+#include <iostream>
+#include <stdlib.h>
+#include <cstring>
+
 //
 //
 unsigned char *key;
 //
-unsigned char str;
+unsigned char str[4];
 //
-struct gamma { unsigned char *state; };
+struct gamma { unsigned char state[4]; };
 //
-gamma g = new_gamma(key);
 //
-gamma new_gamma(unsigned char *key)
+gamma new_gamma(unsigned char key[4])
 {
-	gamma g;
 	srand(*key);
-	g.state = (unsigned char *)rand();
-	return g;
+	gamma gw;
+	for (int i = 0; i < 4; i++)
+	{
+		gw.state[i] = rand();
+	}
+	return gw;
 }
-unsigned char encryption(unsigned char str, gamma g)
+unsigned char encryption(unsigned char str[4], gamma g)
 {
-	unsigned char *cipher;
-	if (sizeof(cipher) == sizeof(int)) std::cout << "Cipher size is 4 bytes!";
-	*cipher = str ^ *g.state;
-	*cipher >> 1;
+	unsigned char cipher[4];
+	//if (sizeof(*str) != 4) exit(228);
+	*cipher = *str ^ *g.state;
+	int f = 1;
+	int r = *cipher & f;
+	r = r << 7;
+	*cipher = *cipher << 1;
+	*cipher |= r;
 	return *cipher;
 }
-unsigned char decryption(unsigned char str, gamma g)
+unsigned char decryption(unsigned char str[4], gamma g)
 {
-	unsigned char *cipher;
-	if (sizeof(cipher) == sizeof(int)) std::cout << "Cipher size is 4 bytes!";
-	str << 1;
-	*cipher = str ^ *g.state;
-	return *cipher;
-}
-int main()
-{
-	std::cin >> key;
-	gamma gi = new_gamma(key);
-	unsigned char *str = (unsigned char *)"aqw";
-	unsigned char res = encryption(*str, gi);
-	if ((sizeof(key) == sizeof(int))&&(sizeof(g.state) == sizeof(int))&&(sizeof(*str) == sizeof(int))) std::cout << "All buffers size is 4 bytes!";
-	else exit(228);
-	std::cout << "Result is " << res;
+	//if (sizeof(*str) != 4) exit(228);
+	int f = 1;
+	int r = *str & f;
+	r = r << 7;
+	*str = *str << 1;
+	*str |= r;
+	*str = *str ^ *g.state;
+	return *str;
 }
