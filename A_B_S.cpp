@@ -4,7 +4,8 @@
 #include <time.h>
 #include <vector>
 #include <cmath>
-
+//sz - условный размер message.
+//k - условный размер key.
 /**/ char buff2[];
 /**/ using namespace std;
 char* handshake(char *sert, char *message)
@@ -37,8 +38,7 @@ char* encrypt(char *message, char *key)
 	for (int i = 0; key[i] != 0; i++) k++;
 	k++;
 	int keey[k];
-	int j = 0;
-	for (; key[j] != 0; j++)
+	for (int j = 0;; key[j] != 0; j++)
 	{
 		keey[j] = *(int *)key;
 	}
@@ -63,8 +63,7 @@ char* decrypt(char *message, char *key)
 	for (int i = 0; key[i] != 0; i++) k++;
 	k++;
 	int keey[k];
-	int j = 0;
-	for (; key[j] != 0; j++)
+	for (int j = 0;; key[j] != 0; j++)
 	{
 		keey[j] = *(int *)key;
 	}
@@ -75,9 +74,4 @@ char* decrypt(char *message, char *key)
 	int res[sz];
 	for (int i = 0; i < buffer.size(); i++) res[i] = log(key[i]) / log(buffer[i]);
 	return (char *)res;
-}
-
-int main()
-{
-	return 0;
 }
