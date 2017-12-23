@@ -66,7 +66,7 @@ private:
 
 kg hsh;
 
-/**/ char buff2[];
+/**/ char buff2[8];
 /**/ using namespace std;
 char* handshake(char *sert, char *message)
 {
