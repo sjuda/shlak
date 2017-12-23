@@ -101,7 +101,7 @@ char* encrypt(char message[])
 }
 char* decrypt(char message[])
 {
-	double dkey = hsh.keyindouble;
+	double dkey = hsh.keyindouble();
 	double *buffer = NULL;
 	int i = 0;
 	for ( ; message[i] != 0; i++) buffer[i] = log(dkey) / log(message[i]);
